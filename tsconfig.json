@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "module": "NodeNext", // compatible with package.json where type is set to module
+    "moduleResolution": "NodeNext",
+    "target": "ES2020",
+    "sourceMap": true,
+    "outDir": "dist"
+  },
+  "include": ["src/**/*"]
+}
