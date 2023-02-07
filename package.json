@@ -4,8 +4,8 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-    "start": "tsc && node ./dist/server.js",
-    "build": "tsc"
+    "start": "node ./dist/server.js",
+    "build": "npm install tsc"
   },
   "repository": {
     "type": "git",
