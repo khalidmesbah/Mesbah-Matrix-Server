@@ -5,6 +5,6 @@ export default class TaskType {
   constructor(
     public name: string,
     public order: number,
-    public _id: ObjectId
+    public _id?: ObjectId
   ) {}
 }

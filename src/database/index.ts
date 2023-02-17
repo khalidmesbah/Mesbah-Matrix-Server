@@ -7,6 +7,7 @@ const collections: {
   scheduleTasks?: mongoDB.Collection;
   delegateTasks?: mongoDB.Collection;
   deleteTasks?: mongoDB.Collection;
+  questions?: mongoDB.Collection;
 } = {};
 
 const connectionString =
@@ -34,11 +35,15 @@ const connectToDatabase = async () => {
     const deleteTasksCollection: mongoDB.Collection = db.collection(
       process.env.TO_DELETE_COLLECTION_NAME as string
     );
+    const questionsCollection: mongoDB.Collection = db.collection(
+      process.env.QUESTIONS_COLLECTION_NAME as string
+    );
 
     collections.doTasks = doTasksCollection;
     collections.scheduleTasks = scheduleTasksCollection;
     collections.delegateTasks = delegateTasksCollection;
     collections.deleteTasks = deleteTasksCollection;
+    collections.questions = questionsCollection;
 
     console.log(`Successfully connected to database: ${db.databaseName}`);
   } catch (error) {

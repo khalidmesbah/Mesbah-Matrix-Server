@@ -2,7 +2,7 @@ import { Router, Request, Response } from "express";
 import { collections } from "../../database";
 const routes = Router();
 import { ObjectId } from "mongodb";
-import TaskType from "../../models/taskType";
+import TaskType from "../../models/TaskType";
 
 routes.get("/", async (_req: Request, res: Response) => {
   try {
