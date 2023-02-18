@@ -8,6 +8,8 @@ const collections: {
   delegateTasks?: mongoDB.Collection;
   deleteTasks?: mongoDB.Collection;
   questions?: mongoDB.Collection;
+  remembers?: mongoDB.Collection;
+  dailyTasks?: mongoDB.Collection;
 } = {};
 
 const connectionString =
@@ -38,12 +40,20 @@ const connectToDatabase = async () => {
     const questionsCollection: mongoDB.Collection = db.collection(
       process.env.QUESTIONS_COLLECTION_NAME as string
     );
+    const remembersCollection: mongoDB.Collection = db.collection(
+      process.env.REMEMBERS_COLLECTION_NAME as string
+    );
+    const tasksCollection: mongoDB.Collection = db.collection(
+      process.env.TASKS_COLLECTION_NAME as string
+    );
 
     collections.doTasks = doTasksCollection;
     collections.scheduleTasks = scheduleTasksCollection;
     collections.delegateTasks = delegateTasksCollection;
     collections.deleteTasks = deleteTasksCollection;
     collections.questions = questionsCollection;
+    collections.remembers = remembersCollection;
+    collections.dailyTasks = tasksCollection;
 
     console.log(`Successfully connected to database: ${db.databaseName}`);
   } catch (error) {
