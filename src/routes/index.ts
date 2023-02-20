@@ -6,6 +6,7 @@ import deleteTasksRoutes from "./apis/deleteTasks";
 import questionsRoutes from "./apis/questions";
 import remembersRoutes from "./apis/remembers";
 import dailyTasksRoutes from "./apis/dailyTasks";
+import stickyNotesRoutes from "./apis/stickyNotes";
 
 const router = Router();
 
@@ -16,5 +17,6 @@ router.use("/delete", deleteTasksRoutes);
 router.use("/questions", questionsRoutes);
 router.use("/remembers", remembersRoutes);
 router.use("/tasks", dailyTasksRoutes);
+router.use("/stickyNotes", stickyNotesRoutes);
 
 export default router;
