@@ -11,6 +11,8 @@ const collections: {
   remembers?: mongoDB.Collection;
   dailyTasks?: mongoDB.Collection;
   stickyNotes?: mongoDB.Collection;
+  lovedQuotes?: mongoDB.Collection;
+  lovedAyahs?: mongoDB.Collection;
 } = {};
 
 const connectionString =
@@ -50,6 +52,12 @@ const connectToDatabase = async () => {
     const stickyNotesCollection: mongoDB.Collection = db.collection(
       process.env.STICKY_NOTES_COLLECTION_NAME as string
     );
+    const lovedQuotesCollection: mongoDB.Collection = db.collection(
+      process.env.LOVED_QUOTES_COLLECTION_NAME as string
+    );
+    const lovedAyahsCollection: mongoDB.Collection = db.collection(
+      process.env.LOVED_AYAHS_COLLECTION_NAME as string
+    );
 
     collections.doTasks = doTasksCollection;
     collections.scheduleTasks = scheduleTasksCollection;
@@ -59,6 +67,8 @@ const connectToDatabase = async () => {
     collections.remembers = remembersCollection;
     collections.dailyTasks = tasksCollection;
     collections.stickyNotes = stickyNotesCollection;
+    collections.lovedQuotes = lovedQuotesCollection;
+    collections.lovedAyahs = lovedAyahsCollection;
 
     console.log(`Successfully connected to database: ${db.databaseName}`);
   } catch (error) {

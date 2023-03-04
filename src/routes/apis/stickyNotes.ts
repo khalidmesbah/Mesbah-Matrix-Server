@@ -7,7 +7,6 @@ import StickyNoteType from "../../models/StickyNoteType";
 routes.get("/", async (_req: Request, res: Response) => {
   try {
     const stickyNotes = await collections?.stickyNotes?.find().toArray();
-    console.log(`stickyNotes==>`, stickyNotes);
     res.status(200).json(stickyNotes);
   } catch (error) {
     res.status(500).json(error);

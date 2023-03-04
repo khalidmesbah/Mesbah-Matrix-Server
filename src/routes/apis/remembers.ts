@@ -7,7 +7,7 @@ import RememberType from "../../models/RememberType";
 routes.get("/", async (_req: Request, res: Response) => {
   try {
     const remembers = await collections?.remembers?.find().toArray();
-    console.log(`remembers==>`, remembers);
+    console.log("from remembers");
     res.status(200).json(remembers);
   } catch (error) {
     res.status(500).json(error);
@@ -17,6 +17,7 @@ routes.get("/", async (_req: Request, res: Response) => {
 routes.get("/new", async (_req: Request, res: Response) => {
   try {
     await collections?.remembers?.updateMany({}, { $set: { done: false } });
+    console.log("new from remembers");
     const remembers = await collections?.remembers?.find().toArray();
     res.status(200).json(remembers);
   } catch (error) {

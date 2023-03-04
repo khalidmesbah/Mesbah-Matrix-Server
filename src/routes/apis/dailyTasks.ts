@@ -7,7 +7,6 @@ import DailyTaskType from "../../models/DailyTaskType";
 routes.get("/", async (_req: Request, res: Response) => {
   try {
     const tasks = await collections?.dailyTasks?.find().toArray();
-    console.log(`dailyTasks==>`, tasks);
     res.status(200).json(tasks);
   } catch (error) {
     res.status(500).json(error);
