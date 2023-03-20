@@ -1,24 +1,24 @@
 {
-  "name": "eisenhower-matrix-server",
+  "name": "mesbah-matrix-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "the backend for the mesbah-matrix",
   "main": "src/server.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "build": "npm install && tsc",
+    "build": "npm install --omit=dev && tsc",
     "dev": "npx nodemon ./src/server.ts"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/khalidmesbah/Eisenhower-Matrix-Server.git"
+    "url": "git+https://github.com/khalidmesbah/Mesbah-Matrix-Server.git"
   },
   "keywords": [],
   "author": "Khalid Mesbah",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/khalidmesbah/Eisenhower-Matrix-Server/issues"
+    "url": "https://github.com/khalidmesbah/Mesbah-Matrix-Server/issues"
   },
-  "homepage": "https://github.com/khalidmesbah/Eisenhower-Matrix-Server#readme",
+  "homepage": "https://github.com/khalidmesbah/Mesbah-Matrix-Server#readme",
   "devDependencies": {
     "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
