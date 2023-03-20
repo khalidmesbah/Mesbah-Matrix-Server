@@ -6,7 +6,7 @@ const routes = Router();
 // get bookmarks
 routes.get("/", async (_req: Request, res: Response) => {
   try {
-    const bookmarks = await collections?.bookmarks.find().toArray();
+    const bookmarks = await collections?.bookmarks?.find().toArray();
     res.status(200).json(bookmarks);
   } catch (error) {
     res.status(500).json(error);

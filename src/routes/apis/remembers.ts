@@ -45,7 +45,7 @@ routes.put("/:id", async (req: Request, res: Response) => {
   try {
     const query = { _id: new ObjectId(id) };
     const remember = await collections?.remembers?.findOne(query);
-    const updatedRemember = { done: !remember.done };
+    const updatedRemember = { done: !remember?.done };
 
     const result = await collections?.remembers?.updateOne(query, {
       $set: updatedRemember,

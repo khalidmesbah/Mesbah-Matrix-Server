@@ -43,7 +43,7 @@ routes.put("/:id", async (req: Request, res: Response) => {
   try {
     const query = { _id: new ObjectId(id) };
     const task = await collections?.dailyTasks?.findOne(query);
-    const updatedTask = { done: !task.done };
+    const updatedTask = { done: !task?.done };
 
     const result = await collections?.dailyTasks?.updateOne(query, {
       $set: updatedTask,

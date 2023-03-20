@@ -4,7 +4,7 @@ const routes = Router();
 // get loved ayahs
 routes.get("/", async (_req: Request, res: Response) => {
   try {
-    const lovedAyahs = await collections?.lovedAyahs.find().toArray();
+    const lovedAyahs = await collections?.lovedAyahs?.find().toArray();
     res.status(200).json(lovedAyahs);
   } catch (error) {
     res.status(500).json(error);
@@ -14,7 +14,7 @@ routes.get("/", async (_req: Request, res: Response) => {
 routes.post("/:surah/:ayah", async (req: Request, res: Response) => {
   try {
     const { surah, ayah } = req.params;
-    const result = await collections.lovedAyahs.updateOne(
+    const result = await collections?.lovedAyahs?.updateOne(
       { surah },
       { $addToSet: { ayahs: ayah } }
     );
@@ -34,7 +34,7 @@ routes.post("/:surah/:ayah", async (req: Request, res: Response) => {
 routes.delete("/:surah/:ayah", async (req: Request, res: Response) => {
   try {
     const { surah, ayah } = req.params;
-    const result = await collections.lovedAyahs.updateOne(
+    const result = await collections?.lovedAyahs?.updateOne(
       { surah },
       { $pull: { ayahs: ayah } }
     );
