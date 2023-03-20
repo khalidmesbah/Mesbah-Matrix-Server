@@ -9,6 +9,7 @@ import dailyTasksRoutes from "./apis/dailyTasks";
 import stickyNotesRoutes from "./apis/stickyNotes";
 import lovedQuotesRoutes from "./apis/lovedQuotes";
 import lovedAyahsRoutes from "./apis/lovedAyahs";
+import bookmarksRoutes from "./apis/bookmarks";
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use("/tasks", dailyTasksRoutes);
 router.use("/sticky-notes", stickyNotesRoutes);
 router.use("/loved-quotes", lovedQuotesRoutes);
 router.use("/loved-ayahs", lovedAyahsRoutes);
+router.use("/bookmarks", bookmarksRoutes);
 
 export default router;

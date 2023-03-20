@@ -19,11 +19,11 @@ routes.get("/:id", async (req: Request, res: Response) => {
     const query = { _id: new ObjectId(id) };
     const task = await collections?.scheduleTasks?.findOne(query);
 
-    if (task) res.status(200).send(task);
+    if (task) res.status(200).json(task);
   } catch (error) {
     res
       .status(404)
-      .send(`Unable to find matching document with id: ${req.params.id}`);
+      .json(`Unable to find matching document with id: ${req.params.id}`);
   }
 });
 routes.post("/", async (req: Request, res: Response) => {
@@ -33,10 +33,10 @@ routes.post("/", async (req: Request, res: Response) => {
 
     result
       ? res.status(201).json({ ...newTask, _id: result?.insertedId })
-      : res.status(500).send("Failed to create a new task.");
+      : res.status(500).json("Failed to create a new task.");
   } catch (error) {
     console.error(error);
-    res.status(400).send(error);
+    res.status(400).json(error);
   }
 });
 routes.put("/:id", async (req: Request, res: Response) => {
@@ -51,11 +51,11 @@ routes.put("/:id", async (req: Request, res: Response) => {
     });
 
     result
-      ? res.status(200).send(`Successfully updated task with id ${id}`)
-      : res.status(304).send(`Task with id: ${id} not updated`);
+      ? res.status(200).json(`Successfully updated task with id ${id}`)
+      : res.status(304).json(`Task with id: ${id} not updated`);
   } catch (error) {
     console.error(error);
-    res.status(400).send(error);
+    res.status(400).json(error);
   }
 });
 routes.delete("/:id", async (req: Request, res: Response) => {
@@ -66,15 +66,40 @@ routes.delete("/:id", async (req: Request, res: Response) => {
     const result = await collections?.scheduleTasks?.deleteOne(query);
 
     if (result && result.deletedCount) {
-      res.status(202).send(`Successfully removed task with id ${id}`);
+      res.status(202).json(`Successfully removed task with id ${id}`);
     } else if (!result) {
-      res.status(400).send(`Failed to remove task with id ${id}`);
+      res.status(400).json(`Failed to remove task with id ${id}`);
     } else if (!result.deletedCount) {
-      res.status(404).send(`Task with id ${id} does not exist`);
+      res.status(404).json(`Task with id ${id} does not exist`);
     }
   } catch (error) {
     console.error(error);
-    res.status(400).send(error);
+    res.status(400).json(error);
+  }
+});
+routes.post("/new", async (req: Request, res: Response) => {
+  const tasks: TaskType[] = req?.body.map(
+    (e: { _id: string; name: string }) => ({
+      _id: new ObjectId(e._id),
+      name: e.name,
+    })
+  );
+  console.log(tasks, "from the server");
+
+  try {
+    const result = await collections?.scheduleTasks?.deleteMany({});
+    await collections?.scheduleTasks?.insertMany(tasks);
+
+    if (result && result.deletedCount) {
+      res.status(202).json(`Successfully removed old tasks`);
+    } else if (!result) {
+      res.status(400).json(`Failed to remove old tasks`);
+    } else if (!result.deletedCount) {
+      res.status(404).json(`Tasks does not exist`);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json(error);
   }
 });
 // experimental

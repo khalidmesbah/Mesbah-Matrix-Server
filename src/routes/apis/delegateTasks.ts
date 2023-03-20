@@ -77,6 +77,31 @@ routes.delete("/:id", async (req: Request, res: Response) => {
     res.status(400).send(error);
   }
 });
+routes.post("/new", async (req: Request, res: Response) => {
+  const tasks: TaskType[] = req?.body.map(
+    (e: { _id: string; name: string }) => ({
+      _id: new ObjectId(e._id),
+      name: e.name,
+    })
+  );
+  console.log(tasks, "from the server");
+
+  try {
+    const result = await collections?.delegateTasks?.deleteMany({});
+    await collections?.delegateTasks?.insertMany(tasks);
+
+    if (result && result.deletedCount) {
+      res.status(202).json(`Successfully removed old tasks`);
+    } else if (!result) {
+      res.status(400).json(`Failed to remove old tasks`);
+    } else if (!result.deletedCount) {
+      res.status(404).json(`Tasks does not exist`);
+    }
+  } catch (error) {
+    console.error(error);
+    res.status(400).json(error);
+  }
+});
 // experimental
 routes.delete("/", async (req, res) => {
   await collections?.delegateTasks?.deleteMany({});

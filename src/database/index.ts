@@ -13,6 +13,7 @@ const collections: {
   stickyNotes?: mongoDB.Collection;
   lovedQuotes?: mongoDB.Collection;
   lovedAyahs?: mongoDB.Collection;
+  bookmarks?: mongoDB.Collection;
 } = {};
 
 const connectionString =
@@ -58,6 +59,9 @@ const connectToDatabase = async () => {
     const lovedAyahsCollection: mongoDB.Collection = db.collection(
       process.env.LOVED_AYAHS_COLLECTION_NAME as string
     );
+    const bookmarksCollection: mongoDB.Collection = db.collection(
+      process.env.BOOKMARKS_COLLECTION_NAME as string
+    );
 
     collections.doTasks = doTasksCollection;
     collections.scheduleTasks = scheduleTasksCollection;
@@ -69,6 +73,7 @@ const connectToDatabase = async () => {
     collections.stickyNotes = stickyNotesCollection;
     collections.lovedQuotes = lovedQuotesCollection;
     collections.lovedAyahs = lovedAyahsCollection;
+    collections.bookmarks = bookmarksCollection;
 
     console.log(`Successfully connected to database: ${db.databaseName}`);
   } catch (error) {
