@@ -5,7 +5,7 @@
   "main": "src/server.ts",
   "scripts": {
     "start": "node ./dist/server.js",
-    "build": "npm install --omit=dev && tsc",
+    "build": "npm install --production && tsc",
     "dev": "npx nodemon ./src/server.ts"
   },
   "repository": {
