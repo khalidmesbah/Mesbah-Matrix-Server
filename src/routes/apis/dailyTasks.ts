@@ -9,7 +9,7 @@ routes.get("/", async (_req: Request, res: Response) => {
     const tasks = await collections?.dailyTasks?.find().toArray();
     res.status(200).json(tasks);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 
@@ -19,7 +19,7 @@ routes.get("/new", async (_req: Request, res: Response) => {
     const tasks = await collections?.dailyTasks?.find().toArray();
     res.status(200).json(tasks);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 
@@ -81,7 +81,7 @@ routes.delete("/:id", async (req: Request, res: Response) => {
 // // experimental
 // routes.delete("/", async (req, res) => {
 //   await collections?.doDailyTasks?.updateMany({});
-//   res.json("done");
+//   res.send("done");
 // });
 
 export default routes;

@@ -10,7 +10,7 @@ routes.get("/", async (_req: Request, res: Response) => {
     console.log(`lovedQuotes==>`, lovedQuotes);
     res.status(200).json(lovedQuotes);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 

@@ -9,7 +9,7 @@ routes.get("/", async (_req: Request, res: Response) => {
     const tasks = await collections?.delegateTasks?.find().toArray();
     res.status(200).json(tasks);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 routes.get("/:id", async (req: Request, res: Response) => {
@@ -84,27 +84,25 @@ routes.post("/new", async (req: Request, res: Response) => {
       name: e.name,
     })
   );
-  console.log(tasks, "from the server");
 
   try {
     const result = await collections?.delegateTasks?.deleteMany({});
     await collections?.delegateTasks?.insertMany(tasks);
 
     if (result && result.deletedCount) {
-      res.status(202).json(`Successfully removed old tasks`);
+      res.status(202).send(`Successfully removed old tasks`);
     } else if (!result) {
-      res.status(400).json(`Failed to remove old tasks`);
+      res.status(400).send(`Failed to remove old tasks`);
     } else if (!result.deletedCount) {
-      res.status(404).json(`Tasks does not exist`);
+      res.status(404).send(`Tasks does not exist`);
     }
   } catch (error) {
-    console.error(error);
-    res.status(400).json(error);
+    res.status(400).send(error);
   }
 });
 // experimental
-routes.delete("/", async (req, res) => {
+routes.delete("/", async (_, res) => {
   await collections?.delegateTasks?.deleteMany({});
-  res.json("done");
+  res.send("done");
 });
 export default routes;

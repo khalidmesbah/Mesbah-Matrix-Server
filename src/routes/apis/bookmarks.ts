@@ -9,7 +9,7 @@ routes.get("/", async (_req: Request, res: Response) => {
     const bookmarks = await collections?.bookmarks?.find().toArray();
     res.status(200).json(bookmarks);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 // get a specific bookmark

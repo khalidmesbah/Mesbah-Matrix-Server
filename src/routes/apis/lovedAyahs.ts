@@ -7,7 +7,7 @@ routes.get("/", async (_req: Request, res: Response) => {
     const lovedAyahs = await collections?.lovedAyahs?.find().toArray();
     res.status(200).json(lovedAyahs);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).send(error);
   }
 });
 // add a loved ayah if not exist
